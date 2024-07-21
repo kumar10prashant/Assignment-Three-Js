@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100%;
+    }
+
+    #c {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* HTML: <div class="loader"></div> */
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  color :#0000;
+  overflow: hidden;
+  animation: l9 5s infinite cubic-bezier(0.3,1,0,1);
+}
+.loader:before {
+  content:"Loading..."
+}
+@keyframes l9 {
+  0%  {text-shadow: 0    0 #000, 11ch 0 #8A9B0F, 22ch 0 #C02942, 33ch 0 #00A0B0,44ch 0 #000}
+  25% {text-shadow:-11ch 0 #000,  0ch 0 #8A9B0F, 11ch 0 #C02942, 22ch 0 #00A0B0,33ch 0 #000}
+  50% {text-shadow:-22ch 0 #000,-11ch 0 #8A9B0F,  0ch 0 #C02942, 11ch 0 #00A0B0,22ch 0 #000}
+  75% {text-shadow:-33ch 0 #000,-22ch 0 #8A9B0F,-11ch 0 #C02942,  0ch 0 #00A0B0,11ch 0 #000}
+  100%{text-shadow:-44ch 0 #000,-33ch 0 #8A9B0F,-22ch 0 #C02942,-11ch 0 #00A0B0, 0ch 0 #000}
+}
+
+
+  </style>
+  <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@v0.166.1/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.166.1/examples/jsm/"
+
+          }
+        }
+      </script>
+   
+      
+</head>
+
+<body>
+  <div class="loader"></div>
+  <canvas id="c"></canvas>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>
