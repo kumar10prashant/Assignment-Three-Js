@@ -143,7 +143,7 @@ function init() {
 
     //Camera Controls
     const controls = new OrbitControls(cam, renderer.domElement);
-    controls.enablePan = false;
+    controls.enablePan = true;
     controls.target.set(0, 0, - 0.2);
     controls.update();
     controls.minDistance = 10;
