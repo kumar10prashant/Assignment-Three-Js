@@ -10,10 +10,8 @@ Three js and cannon js interactive scene setup
 ![App Screenshot](https://i.ibb.co/F8PkHBJ/Screenshot-21-7-2024-231517-kumar10prashant-github-io.jpg)
 
 ## 🔗 Links
-[![Live](https://img.shields.io/badge/LIve-000?style=for-the-badge&logo=ko-go&logoColor=white)](https://kumar10prashant.github.io/Assignment-Three-Js/)
-
-## 🔗 Links
-[![LINK](https://img.shields.io/badge/LINK-000?style=for-the-badge&logo=ko-go&logoColor=white)](https://github.com/kumar10prashant/Assignment-Three-Js.git)
+[![Live Project](https://img.shields.io/badge/LIve-000?style=for-the-badge&logo=ko-go&logoColor=white)](https://kumar10prashant.github.io/Assignment-Three-Js/)
+[![Github Page](https://img.shields.io/badge/LINK-000?style=for-the-badge&logo=ko-go&logoColor=white)](https://github.com/kumar10prashant/Assignment-Three-Js.git)
 
 
 
