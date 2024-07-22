@@ -15,14 +15,9 @@ Three js and cannon js interactive scene setup
 
 
 
-
-## Installation
-
-After download github project you need to install some library
-
-
  ##  Import from a CDN
-Install Node.js. We'll need it to load manage dependencies and to run our build tool.
+Import library from cdn and change version of that library
+e.g. 0.166.1 is used in this project
 
 
 ```bash
