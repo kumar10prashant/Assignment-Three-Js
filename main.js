@@ -42,6 +42,7 @@ if(sessionStorage.getItem("Scaler") != null){
 
     param.Scaler  =  (sessionStorage.getItem("Scaler"));
     }
+console.log( (sessionStorage.getItem("Scaler")));
 
 //alert(navigator.userAgent.match(/Android/i))
 
