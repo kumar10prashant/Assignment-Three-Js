@@ -292,9 +292,11 @@ function Lights() {
 
     const addition_Graphic = LightFolder.addFolder("Graphic");
     addition_Graphic.add(param, "postprocessing");
-    addition_Graphic.add(param, "Scaler", 1, 3).onChange(function () {
-        renderer.setPixelRatio(window.devicePixelRatio / param.Scaler)
+    addition_Graphic.add(param, "Scaler", 1, 3).onFinishChange(function () {
+        //renderer.setPixelRatio(window.devicePixelRatio / param.Scaler)
         sessionStorage.setItem("Scaler",param.Scaler);
+        window.location.reload();
+
     });
 }
 
