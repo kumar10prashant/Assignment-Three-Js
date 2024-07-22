@@ -31,11 +31,17 @@ let gui, obstcale_Detail;
 const loader = document.querySelector(".loader");
 const param = {
     postprocessing: true,
-    DirLight_Intensity: 0.5,
+    DirLight_Intensity: 1,
     AmbientLight_Intensity: 0.3,
     Scaler: 1,
 
 }
+
+    
+    param.Scaler = sessionStorage.getItem("Scaler");
+
+//alert(navigator.userAgent.match(/Android/i))
+
 
 gui = new GUI();
 
@@ -121,7 +127,7 @@ function init() {
     canvas = renderer.domElement;
     renderer.toneMapping = THREE.NeutralToneMapping;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.setPixelRatio(window.devicePixelRatio / param.Scaler);
+    renderer.setPixelRatio(window.devicePixelRatio/param.Scaler);
     renderer.shadowMap.enabled = true;
     renderer.toneMappingExposure = 1;
 
@@ -173,7 +179,7 @@ function init() {
         normalMap: normalMap,
         aoMap: texture.load("Material/GroundMat/Rock057_1K-JPG_AmbientOcclusion.jpg"),
         metalness: 0.8,
-        side: THREE.DoubleSide,
+        //side: THREE.DoubleSide,
 
     })
 
@@ -192,7 +198,7 @@ function init() {
         material: bouncyMaterial
     });
     groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
-    world.addBody(groundBody);
+   world.addBody(groundBody);
     world.addContactMaterial(mixedMaterial);
 
     //#region PostProcessing  
@@ -252,10 +258,10 @@ function Lights() {
     //Direction Light
     const dirLight = new THREE.DirectionalLight(0xffffff, param.DirLight_Intensity);
     dirLight.name = 'Dir. Light';
-    dirLight.position.set(0, 5, 0);
+    dirLight.position.set(-3, 10, -10);
     dirLight.castShadow = true;
-    dirLight.shadow.camera.near = 1;
-    dirLight.shadow.camera.far = 30;
+    dirLight.shadow.camera.near = 0.1;
+    dirLight.shadow.camera.far = 40;
     dirLight.shadow.camera.right = 15;
     dirLight.shadow.camera.left = - 15;
     dirLight.shadow.camera.top = 25;
@@ -284,6 +290,7 @@ function Lights() {
     addition_Graphic.add(param, "postprocessing");
     addition_Graphic.add(param, "Scaler", 1, 3).onChange(function () {
         renderer.setPixelRatio(window.devicePixelRatio / param.Scaler)
+        sessionStorage.setItem("Scaler",param.Scaler);
     });
 }
 
@@ -462,13 +469,6 @@ function animate() {
     else
         renderer.render(scene, cam);
 
-    totaltime += 0.01;
-    const v = Math.sin(totaltime * 2.0) * 0.5 * 0.5;
-    const c1 = new THREE.Vector3(0, 1, 0);
-    const c2 = new THREE.Vector3(1, 0, 0);
-    const spherecolor = c1.lerp(c2, v);
-
-    ShaderMesh.material.uniforms.sphereColour.value = spherecolor;
     for (let i = 0; i < Obstacles.length; i++) {
         UpDown(Obstacles[i]);
         rotateAnim(Obstacles[i]);
