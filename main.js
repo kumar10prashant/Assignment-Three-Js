@@ -462,11 +462,7 @@ Obstacles.push(ShaderMesh);
 function animate() {
     requestAnimationFrame(animate);
 
-    const elapsedTime = clock.getElapsedTime();
-    const deltaTime = elapsedTime - previousTime;
-    previousTime = elapsedTime;
-
-    world.step((1 / 60)*deltaTime);
+    world.step((1 / 60));
     spheremesh.position.copy(phySphereBody.position);
     spheremesh.quaternion.copy(phySphereBody.quaternion);
     if (param.postprocessing)
