@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
-import { WebGLRenderer } from "three";
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
@@ -40,18 +39,11 @@ const param = {
 
 gui = new GUI();
 
-
-
+//Loading Screen
 const Manager = new THREE.LoadingManager();
-Manager.onLoad = function(){
-loader.style.display = 'none';
+Manager.onLoad = function () {
+    loader.style.display = 'none';
 }
-
-
-
-
-
-
 
 //Basic Shader
 const _VS = `
@@ -127,7 +119,7 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputEncoding = THREE.sRGBEncoding;
     canvas = renderer.domElement;
-    renderer.toneMapping = THREE.NoToneMapping;
+    renderer.toneMapping = THREE.NeutralToneMapping;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setPixelRatio(window.devicePixelRatio / param.Scaler);
     renderer.shadowMap.enabled = true;
@@ -143,7 +135,6 @@ function init() {
 
     //Camera Controls
     const controls = new OrbitControls(cam, renderer.domElement);
-    controls.enablePan = true;
     controls.target.set(0, 0, - 0.2);
     controls.update();
     controls.minDistance = 10;
@@ -155,12 +146,12 @@ function init() {
         const model = gltf.scene;
         model.scale.set(10, 10, 10);
         model.position.set(-50, -5, 10);
-        model.traverse(function(node){
-            if(node.isMesh){
+        model.traverse(function (node) {
+            if (node.isMesh) {
                 node.castShadow = true;
                 node.receiveShadow = true;
             }
-            
+
         })
         scene.add(model);
     })
@@ -341,7 +332,7 @@ spheremesh.name = "Sphere";
 const phySphere = new CANNON.Sphere(0.5);
 const phySphereBody = new CANNON.Body({
     shape: phySphere,
-    mass: 5,
+    mass: 100,
     position: new CANNON.Vec3(10, 50, 0),
     material: bouncyMaterial
 });
@@ -445,8 +436,7 @@ function GuiUpdate(model) {
     }
     obstcale_Detail.open()
 }
-const clock = new THREE.Clock();
-let previousTime = 0;
+
 
 Lights();
 animate();
@@ -462,7 +452,9 @@ Obstacles.push(ShaderMesh);
 function animate() {
     requestAnimationFrame(animate);
 
-    world.step((1 / 60));
+   
+
+    world.step(1 / 60);
     spheremesh.position.copy(phySphereBody.position);
     spheremesh.quaternion.copy(phySphereBody.quaternion);
     if (param.postprocessing)
@@ -482,10 +474,7 @@ function animate() {
         rotateAnim(Obstacles[i]);
         PathFollows(Obstacles[i]);
     }
-    UpDown(CubeMesh);
-    rotateAnim(CubeMesh);
-    UpDown(torusmesh);
-    rotateAnim(torusmesh);
+   
     stats.update();
 }
 
@@ -551,4 +540,8 @@ function wrapping(ground, tilingX, tilingY) {
     ground.wrapT = THREE.RepeatWrapping;
     ground.repeat.set(tilingX, tilingY);
 }
-canvas.addEventListener('click', rayCastCheck);
+
+
+canvas.addEventListener('mousedown',rayCastCheck);
+
+
