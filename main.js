@@ -466,7 +466,7 @@ function animate() {
     const deltaTime = elapsedTime - previousTime;
     previousTime = elapsedTime;
 
-    world.step(1 / 60);
+    world.step((1 / 60)*deltaTime);
     spheremesh.position.copy(phySphereBody.position);
     spheremesh.quaternion.copy(phySphereBody.quaternion);
     if (param.postprocessing)
