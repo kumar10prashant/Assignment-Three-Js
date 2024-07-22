@@ -347,7 +347,7 @@ const phySphereBody = new CANNON.Body({
     position: new CANNON.Vec3(10, 50, 0),
     material: bouncyMaterial
 });
-console.log(torusmat.color);
+
 
 world.add(phySphereBody);
 
