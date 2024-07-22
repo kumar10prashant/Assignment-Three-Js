@@ -79,7 +79,7 @@ AmbientLight_Intensity: 0.3,
 Scaler: 1,
 ```
 In GUI you can find all these variable by using this you can on off postprocessing.<br>
-Scaler for downgrade and upgrade number of pixel which will improve performence/<br>
+Scaler for downgrade and upgrade number of pixel which will improve performance/<br>
 Light intensity controller for visuals.
 
 
@@ -134,46 +134,44 @@ renderer.toneMappingExposure = 1;
 Fov stands for field of view,the range of the observable world visible at any given time through the human eye, a camera viewfinder or on a display screen<br>
 aspect represent display size<br>near show minimum value of camera in which camera can see a object and far represent maximum value in which camera can see a object.
 ```bash
-   //Camera
-    cam = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    cam.position.set(10, 15, 20);
-    cam.lookAt(scene.position);
+//Camera
+cam = new THREE.PerspectiveCamera(fov, aspect, near, far);
+cam.position.set(10, 15, 20);
+cam.lookAt(scene.position);
 
-    //Camera Controls
-    const controls = new OrbitControls(cam, renderer.domElement);
-    controls.target.set(0, 0, - 0.2);
-    controls.update();
-    controls.minDistance = 10;
-    controls.maxDistance = 200;
-    controls.maxPolarAngle = Math.PI / 2;
+//Camera Controls
+const controls = new OrbitControls(cam, renderer.domElement);
+controls.target.set(0, 0, - 0.2);
+controls.update();
+controls.minDistance = 10;
+controls.maxDistance = 200;
+controls.maxPolarAngle = Math.PI / 2;
 ```
 ### Basic 3D model Import example
 ```bash
-    gLTFLoader.load('tanr_makina_factory_building/scene.gltf', function (gltf) {
-        const model = gltf.scene;
-        model.scale.set(10, 10, 10);
-        model.position.set(-50, -5, 10);
-        model.traverse(function (node) {
-            if (node.isMesh) {
-                node.castShadow = true;
-                node.receiveShadow = true;
-            }
-
-        })
-        scene.add(model);
-    })
+gLTFLoader.load('tanr_makina_factory_building/scene.gltf', function (gltf) {
+const model = gltf.scene;
+model.scale.set(10, 10, 10);
+model.position.set(-50, -5, 10);
+model.traverse(function (node) {
+if (node.isMesh) {
+node.castShadow = true;
+node.receiveShadow = true;
+}
+})
+scene.add(model);
+})
 ```
 ### Basic Plane with Ground texture
-Here i use MeshStandardMaterial because they interact with light.
+Here i use MeshStandardMaterial because they interact with light.The map contain the color data of object in UV space,Normal Map contain the fake surface normal information,Metalness refer the smoothness whose value goes 0 to 1,where 0 represent completelly smooth surface and 1 represent completely rough surface.
 ```bash
-    const GroundMat = new THREE.MeshStandardMaterial({
-        map: tex,
-        normalMap: normalMap,
-        aoMap: texture.load("Material/GroundMat/Rock057_1K-JPG_AmbientOcclusion.jpg"),
-        metalness: 0.8,
-        side: THREE.DoubleSide,
-
-    })
+const GroundMat = new THREE.MeshStandardMaterial({
+map: tex,
+normalMap: normalMap,
+aoMap: texture.load("Material/GroundMat/Rock057_1K-JPG_AmbientOcclusion.jpg"),
+metalness: 0.8,
+side: THREE.DoubleSide,
+})
 
     const GroundMesh = new THREE.Mesh(Ground, GroundMat);
     scene.add(GroundMesh);
@@ -191,30 +189,28 @@ We can check object by drawing a raycast from camera.forward position and if som
 canvas.addEventListener('mousedown',rayCastCheck);
 
 function rayCastCheck(event) {
-    const raycast = new THREE.Raycaster();
-    const pointer = new THREE.Vector2();
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
-    raycast.setFromCamera(pointer, cam);
-    intersects = raycast.intersectObjects(scene.children);
-    try {
-        if (intersects.length > 0) {
-            if (obstcale_Detail) {
-                obstcale_Detail.destroy();
+const raycast = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+raycast.setFromCamera(pointer, cam);
+intersects = raycast.intersectObjects(scene.children);
+try {
+if (intersects.length > 0) {
+if (obstcale_Detail) {
+obstcale_Detail.destroy();
 
-            }
-            if (intersects[0].object.parent == scene) {
-                GuiUpdate(intersects[0].object);
-            }
-            else {
-
-                GuiUpdate(intersects[0].object.parent);
-            }
-        }
-    } catch {
+}
+if (intersects[0].object.parent == scene) {
+GuiUpdate(intersects[0].object);
+}
+else {
+GuiUpdate(intersects[0].object.parent);
+}
+}
+}catch {
         //console.log("Nothing Found");
-
-    }
+}
 }
 ```
 ### Animation
