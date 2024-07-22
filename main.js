@@ -38,7 +38,10 @@ const param = {
 }
 
     
-    param.Scaler = sessionStorage.getItem("Scaler");
+if(sessionStorage.getItem("Scaler") != null){
+
+    param.Scaler  =  (sessionStorage.getItem("Scaler"));
+    }
 
 //alert(navigator.userAgent.match(/Android/i))
 
