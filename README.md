@@ -75,7 +75,7 @@ Scaler: 1,
 ```
 In GUI you can find all these variable by using this you can on off postprocessing.<br>
 Scaler for downgrade and upgrade number of pixel which will improve performance also remeber you need to refresh your webpage after changing scaler value<br>
-Light intensity controller for visuals.
+Light intensity control the brightness of light.
 
 
 
